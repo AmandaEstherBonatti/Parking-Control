@@ -1,0 +1,93 @@
+﻿@model ParkingControl.Models.ParkedCar
+
+<div class="card">
+    <div class="card-header">
+        <h5>Detalhes do Carro </h5>
+    </div>
+    <div class="card-body">
+        <form asp-controller="Home" asp-action="UpdateCar" asp-route-id="@Model.Id" method="post">
+            <div class="row mb-5">
+                <div class="col">
+                    <label class="form-label">Placa do Carro</label>
+                    <input type="text" asp-for=LicensePlate value="@Model.LicensePlate" class="form-control" name="LicensePlate" id="LicensePlate" placeholder="Placa do Carro" aria-label="Placa do Carro">
+                </div>
+
+                <div class="col">
+                    <label class="form-label">Entrada</label>
+                    <input type="text" asp-for=ArrivalTime value="@Model.ArrivalTime" class="form-control" name="ArrivalTime" id="ArrivalTime" placeholder="Entrada" aria-label="Entrada">
+                </div>
+         
+                <div class="col">
+                    <label class="form-label">Saída</label>
+                    <input type="text" asp-for=DepartureTime value ="@Model.DepartureTime" class="form-control" name="DepartureTime" id="DepartureTime" placeholder="Saída" aria-label="Saída">
+                </div>
+                <div class="col">
+                    <label class="form-label">Duração</label>
+                    <input type="text" asp-for=Duration value ="@Model.Duration" class="form-control" name="Duration" id="Duration" placeholder="Duração" aria-label="Duração">
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col">
+                    <label class="form-label">Tempo Cobrado (Em Horas)</label>
+                    <input type="text" asp-for=SnakeTime value ="@Model.SnakeTime" asp-for=SnakeTime class="form-control" name="SnakeTime" id="SnakeTime" placeholder="Tempo Cobrado" aria-label="Tempo Cobrado">
+                </div>
+                <div class="col">
+                    <label class="form-label">Preço</label>
+                    <input type="text" value="R$@Model.Price" class="form-control" name="Price" id="Price" placeholder="Preço" aria-label="Preço" disabled>
+                </div>
+                <div class="col">
+                    <label class="form-label">Total a Pagar</label>
+                    <input type="text" asp-for=AmountToPay value="R$@Model.AmountToPay" asp-for=AmountToPay class="form-control" name="AmountToPay" id="AmountToPay" placeholder="Total a Pagar" aria-label="Total a Pagar">
+                </div>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-outline-success">Editar</button>
+                <a class="btn btn-outline-danger AddPopUp">Deletar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="MyPopUp" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="text-center pb-4">Deseja Excluir esse carro? </h5>
+                        <div class="row">
+                            <div class="d-grid gap-2 col-3 mx-auto">
+                                <div>
+                                    <button type="submit" class="btn btn-outline-primary ClosePopUp">Não</button>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 col-3 mx-auto">
+                                <div>
+                                    <a type="submit" class="btn btn-outline-danger" asp-controller="Home" asp-action="DeleteCar" asp-route-id="@Model.Id">Sim</a>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".AddPopUp").click(function (e) {
+                $('#MyPopUp').modal('show');
+            });
+        });
+        $(document).ready(function () {
+            $(".ClosePopUp").click(function (e) {
+                $('#MyPopUp').modal('hide');
+            });
+        });
+
+    </script>
+    }
